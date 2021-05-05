@@ -1,0 +1,25 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30717.126
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Narumikazuchi.Hiragana_And_Katakana_SelfTester", "Narumikazuchi.Hiragana_And_Katakana_SelfTester\Narumikazuchi.Hiragana_And_Katakana_SelfTester.csproj", "{A74D474E-EBCD-4BEC-A821-EEB25E696BAB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A74D474E-EBCD-4BEC-A821-EEB25E696BAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A74D474E-EBCD-4BEC-A821-EEB25E696BAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A74D474E-EBCD-4BEC-A821-EEB25E696BAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A74D474E-EBCD-4BEC-A821-EEB25E696BAB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {646A6DEF-B583-45E9-86C9-03C6DCAE93A3}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,228 @@
+﻿<Window x:Class="Narumikazuchi.Hiragana_And_Katakana_SelfTester.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Narumikazuchi.Hiragana_And_Katakana_SelfTester"
+        mc:Ignorable="d"
+        Height="480" Width="850" 
+        Foreground="#FFA0A0A0" AllowsTransparency="True" ResizeMode="NoResize" WindowStyle="None">
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="24" CornerRadius="0" GlassFrameThickness="0" />
+    </WindowChrome.WindowChrome>
+    <Window.Resources>
+        <Style TargetType="{x:Type Button}" x:Key="DarkButton">
+            <Setter Property="Background" Value="#00A0A0A0" />
+            <Setter Property="Foreground" Value="#FFA0A0A0" />
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="#FFA0A0A0" BorderThickness="2" Padding="{TemplateBinding Padding}">
+                            <TextBlock Text="{TemplateBinding Content}" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Stretch" Foreground="{TemplateBinding Foreground}" />
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <EventTrigger RoutedEvent="MouseEnter">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation Storyboard.TargetProperty="Background.Color" To="#FFA0A0A0" Duration="0:0:0.1" />
+                                        <ColorAnimation Storyboard.TargetProperty="Foreground.Color" To="#FF000000" Duration="0:0:0.1" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+
+                            <EventTrigger RoutedEvent="MouseLeave">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation Storyboard.TargetProperty="Background.Color" To="#00A0A0A0" Duration="0:0:0.1" />
+                                        <ColorAnimation Storyboard.TargetProperty="Foreground.Color" To="#FFA0A0A0" Duration="0:0:0.1" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="{x:Type TextBox}" x:Key="DarkTextBox">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Foreground" Value="#FFA0A0A0" />
+            <Setter Property="BorderBrush" Value="#FFA0A0A0" />
+        </Style>
+    </Window.Resources>
+    <Border Background="#FF202020" BorderThickness="1" BorderBrush="#9900FF">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="24" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="8" />
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0" Background="#FF303030">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="24" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Center" TextAlignment="Left" Padding="2" Text="Hiragana Quiz" />
+
+                <Button Grid.Column="1" x:Name="_closeButton" WindowChrome.IsHitTestVisibleInChrome="True" Background="#00FF0000" Foreground="#FFA0A0A0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="CloseClick">
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Border Background="{TemplateBinding Background}" BorderThickness="0" Padding="4">
+                                            <TextBlock Foreground="{TemplateBinding Foreground}" Text="X" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" TextAlignment="Center" />
+                                        </Border>
+
+                                        <ControlTemplate.Triggers>
+                                            <EventTrigger RoutedEvent="MouseEnter">
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <ColorAnimation Storyboard.TargetProperty="Background.Color" To="#FFFF0000" Duration="0:0:0.1" />
+                                                        <ColorAnimation Storyboard.TargetProperty="Foreground.Color" To="#FFFFFFFF" Duration="0:0:0.1" />
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger>
+
+                                            <EventTrigger RoutedEvent="MouseLeave">
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <ColorAnimation Storyboard.TargetProperty="Background.Color" To="#00FF0000" Duration="0:0:0.1" />
+                                                        <ColorAnimation Storyboard.TargetProperty="Foreground.Color" To="#FFA0A0A0" Duration="0:0:0.1" />
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </Button.Style>
+                </Button>
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <Border x:Name="_quizResult" Opacity="0" Visibility="Collapsed">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Result-Statistics -->
+                        <Grid Grid.Column="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="2*" />
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Grid.Column="0" Margin="12 96" Orientation="Vertical">
+                                <TextBlock Text="Correct:" Margin="0 6" />
+                                <Button Content="Return to Main Menu" Margin="0 32" Style="{StaticResource DarkButton}" Click="ReturnMainMenuClick" />
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="1" Margin="12 96" Orientation="Vertical">
+                                <TextBlock x:Name="_correctResultTextBlock" Text="0%" Margin="0 6" />
+                            </StackPanel>
+                        </Grid>
+                    </Grid>
+                </Border>
+
+                <Border x:Name="_quizPage" Opacity="0" Visibility="Collapsed">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="3*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="12" />
+                        </Grid.RowDefinitions>
+
+                        <!-- Hiragana -->
+                        <Border Grid.Column="1" Grid.Row="0" Margin="6" BorderBrush="#FFA0A0A0" BorderThickness="1">
+                            <Viewbox>
+                                <TextBlock x:Name="_quizTokenTextBlock" Foreground="#FFA0A0A0" Text="" FontFamily="Yu Gothic" />
+                            </Viewbox>
+                        </Border>
+
+                        <!-- Correct/False Text -->
+                        <TextBlock x:Name="_quizAnswerTextBlock" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" />
+
+                        <!-- Answerbox -->
+                        <TextBox x:Name="_quizAnswerTextBox" Grid.Column="1" Grid.Row="2" VerticalContentAlignment="Center" Margin="24" Style="{StaticResource DarkTextBox}" KeyUp="AcceptAnswer" />
+
+                        <!-- Confirm Button -->
+                        <Button x:Name="_quizAnswerButton" Grid.Column="1" Grid.Row="3" Margin="48 24" Content="Confirm" Style="{StaticResource DarkButton}" Click="ConfirmAnswerClick" />
+                    </Grid>
+                </Border>
+
+                <Border x:Name="_mainMenu">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Menu Options -->
+                        <Grid Grid.Column="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Grid.Column="0" Margin="12 96" Orientation="Vertical">
+                                <TextBlock Text="Sets:" Margin="0 6" />
+                                <TextBlock Text="Long Characters per Set:" Margin="0 6" />
+                                <TextBlock Text="Length of Long Characters:" Margin="0 6" />
+                                <Button Content="Start Quiz" Margin="0 12" Style="{StaticResource DarkButton}" Click="StartQuizClick" />
+                                <Button Content="Settings" Margin="0 6 0 6" Style="{StaticResource DarkButton}" Click="SettingsClick" />
+                                <Button Content="Statistics" Margin="0 3" Style="{StaticResource DarkButton}" Click="StatisticsClick" />
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="1" Margin="12 96" Orientation="Vertical">
+                                <TextBox x:Name="_setCountTextBox" Text="3" Margin="0 6" TextAlignment="Center" Style="{StaticResource DarkTextBox}" MinWidth="32" PreviewTextInput="CheckTextInput" />
+                                <TextBox x:Name="_longCountTextBox" Text="3" Margin="0 6" TextAlignment="Center" Style="{StaticResource DarkTextBox}" MinWidth="32" PreviewTextInput="CheckTextInput" />
+                                <TextBox x:Name="_longLengthTextBox" Text="3" Margin="0 6" TextAlignment="Center" Style="{StaticResource DarkTextBox}" MinWidth="32" PreviewTextInput="CheckTextInput" />
+                            </StackPanel>
+                        </Grid>
+
+                        <!-- Statistics -->
+                        <Grid Grid.Column="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="2*" />
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Grid.Column="0" Margin="12 96" Orientation="Vertical">
+                                <TextBlock Text="Average Correct:" Margin="0 6" />
+                                <TextBlock Text="Total Runs:" Margin="0 6" />
+                                <TextBlock Text="Worst Characters:" Margin="0 6" />
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="1" Margin="12 96" Orientation="Vertical">
+                                <TextBlock x:Name="_correctRateTextBlock" Text="0%" Margin="0 6" />
+                                <TextBlock x:Name="_totalRunsTextBlock" Text="0" Margin="0 6" />
+                                <TextBlock x:Name="_statisticWorstCharacters" Text="" Margin="0 6" TextWrapping="WrapWithOverflow" />
+                            </StackPanel>
+                        </Grid>
+                    </Grid>
+                </Border>
+            </Grid>
+
+            <!-- Progress -->
+            <Border x:Name="_progressBorder" Grid.Row="2" HorizontalAlignment="Left" Background="Green" Width="0" Visibility="Collapsed" />
+        </Grid>
+    </Border>
+</Window>
