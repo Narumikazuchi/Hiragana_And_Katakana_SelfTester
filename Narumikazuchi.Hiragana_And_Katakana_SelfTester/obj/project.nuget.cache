@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "nvh4p0TH2LTW5W1s+q0vVk7CdmJGFnDz9y5qI9nJ1QXMPro57hJXgk+WWsqy466Yb4/O+5q5kihLAQ4R7BdlQg==",
+  "dgSpecHash": "CvGX9gb7k5xMeuM8e9plBWVSzhjHOWV6kJN72hVd27FIHiBo+9k4dbfTMb99CnOZDNFGZHG7qHw4CC9A6IL1IA==",
   "success": true,
   "projectFilePath": "\\\\192.168.0.30\\Davy\\Programmierung\\Projects\\Hiragana and Katakana SelfTester\\Narumikazuchi.Hiragana_And_Katakana_SelfTester\\Narumikazuchi.Hiragana_And_Katakana_SelfTester.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Davy\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\5.0.9\\microsoft.netcore.app.host.win-x64.5.0.9.nupkg.sha512"
+  ],
   "logs": []
 }
